@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#10131e" />
+  <meta name="description" content="RUDY — visual novel persidangan tentang tasamuh, musawah, dan ukhuwwah." />
+  <title>RUDY — Sidang Keadilan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="game" class="game-shell">
+    <section id="intro" class="intro-screen" aria-label="Prolog">
+      <div class="intro-grain"></div>
+      <div class="intro-content">
+        <p class="eyebrow">VISUAL NOVEL INTERAKTIF · PENDIDIKAN AGAMA ISLAM</p>
+        <h1>RUDY<span>.</span></h1>
+        <p class="intro-subtitle">SIDANG KEADILAN</p>
+        <div class="intro-rule"></div>
+        <p id="synopsis" class="synopsis"></p>
+        <button id="startButton" class="gold-button" hidden>MULAI SIDANG <span>↗</span></button>
+        <p class="intro-note">TASAMUH · MUSAWAH · UKHUWWAH</p>
+      </div>
+      <div class="intro-seal" aria-hidden="true">R<br><span>✦</span></div>
+    </section>
+
+    <section id="courtroom" class="courtroom" hidden>
+      <header class="topbar">
+        <a class="wordmark" href="#" aria-label="Rudy">RUDY<span>.</span></a>
+        <div class="top-center"><span class="live-dot"></span><span id="locationLabel">GEDUNG PENGADILAN · RUANG SIDANG</span></div>
+        <div class="hp-panel" aria-label="Kondisi Pak Raya">
+          <div class="hp-copy"><span>PAK RAYA</span><strong id="hpValue">100%</strong></div>
+          <div class="hp-track"><div id="hpFill" class="hp-fill"></div></div>
+        </div>
+      </header>
+
+      <div class="scene-wrap">
+        <div class="scene" id="scene">
+          <div class="court-glow"></div>
+          <div class="window window-left"><i></i><i></i><b></b></div>
+          <div class="window window-right"><i></i><i></i><b></b></div>
+          <div class="wall-seal"><span>✦</span><small>KEADILAN</small></div>
+          <div class="balcony"></div>
+          <div class="judge-dais"><div class="dais-front"><span>HAKIM KETUA</span></div><div class="judge-figure"><div class="judge-wig">✦</div><div class="judge-face"><i class="brow"></i><i class="eye"></i><i class="beard"></i></div><div class="judge-robe"></div></div></div>
+          <div class="bench bench-left"><div class="bench-front"><span>PEMBELA</span></div></div>
+          <div class="bench bench-right"><div class="bench-front"><span>PENUNTUT</span></div></div>
+          <div class="wood-floor"></div>
+          <div class="rail rail-left"></div><div class="rail rail-right"></div>
+          <div class="character character-rudy" data-character="RUDY">
+            <div class="char-aura"></div><div class="char-body"><div class="suit-lapel"></div><div class="shirt"></div><div class="tie"></div></div>
+            <div class="char-neck"></div><div class="char-head"><div class="hair"></div><div class="hair-fringe"></div><div class="eyes"><i></i><i></i></div><div class="nose"></div><div class="mouth"></div></div>
+          </div>
+          <div class="character character-kalista" data-character="MBAK KALISTA">
+            <div class="char-aura"></div><div class="char-body"><div class="char-coat"></div><div class="scarf-tail"></div></div>
+            <div class="char-neck"></div><div class="char-head"><div class="hijab"></div><div class="hijab-inner"></div><div class="eyes"><i></i><i></i></div><div class="nose"></div><div class="mouth"></div></div>
+          </div>
+          <div class="character character-raya" data-character="PAK RAYA">
+            <div class="char-aura"></div><div class="char-body"><div class="char-coat"></div><div class="shirt"></div><div class="tie"></div></div>
+            <div class="char-neck"></div><div class="char-head"><div class="hair"></div><div class="eyes"><i></i><i></i></div><div class="nose"></div><div class="mouth"></div></div>
+          </div>
+          <div class="character character-setot" data-character="PAK SETOT">
+            <div class="char-aura"></div><div class="char-body"><div class="batik"></div></div>
+            <div class="char-neck"></div><div class="char-head"><div class="hair"></div><div class="eyes"><i></i><i></i></div><div class="nose"></div><div class="mouth"></div></div>
+          </div>
+          <div class="hallway-sign"><span>GEDUNG PENGADILAN</span><b>RUANG SIDANG UTAMA</b></div>
+          <div class="scene-caption"><span id="chapterLabel">BAB I · HAK YANG SAMA</span><span id="sceneLabel">RUANG SIDANG</span></div>
+          <div id="objectionFlash" class="objection-flash" aria-hidden="true"><div class="objection-streaks"></div><strong>OBJECTION<span>!</span></strong><small>KEBERATAN DITERIMA</small></div>
+        </div>
+      </div>
+
+      <section class="dialogue-panel" aria-live="polite">
+        <div class="speaker-row"><span id="speakerName" class="speaker-name">PAK HARTO</span><span class="dialogue-hint">SIDANG BERLANGSUNG</span></div>
+        <div id="dialogueText" class="dialogue-text" tabindex="0"></div>
+        <div class="dialogue-footer"><span><i class="sound-indicator">♫</i> NARASI SIDANG</span><button id="continueButton" class="continue-button" hidden>LANJUTKAN <b>↗</b></button></div>
+      </section>
+
+      <section id="typingPanel" class="typing-panel" hidden>
+        <div class="typing-heading"><div><span class="typing-kicker">BANTAHAN RUDY</span><h2>Ketik argumenmu<span>.</span></h2></div><span class="no-timer">TANPA BATAS WAKTU</span></div>
+        <div class="target-quote"><span>ARGUMEN YANG HARUS DISAMPAIKAN</span><p id="targetText"></p></div>
+        <div class="input-wrap">
+          <div id="typingMirror" class="typing-mirror" aria-hidden="true"></div>
+          <textarea id="argumentInput" rows="3" aria-label="Ketik argumen bantahan" autocapitalize="sentences" spellcheck="false"></textarea>
+          <span class="input-placeholder">Mulai mengetik bantahan Rudy di sini…</span>
+        </div>
+        <div class="typing-footer"><span id="typingStatus">Ketik sesuai argumen di atas. Tekan Enter saat selesai.</span><button id="submitButton" class="submit-button" disabled>KIRIM BANTAHAN <b>↗</b></button></div>
+      </section>
+
+      <footer class="bottom-bar"><span>RUDY <i>—</i> SIDANG KEADILAN</span><span id="progressText">PROLOG</span><button id="soundButton" aria-label="Aktifkan atau matikan suara">SUARA <b>ON</b></button></footer>
+      <div id="toast" class="toast" role="status"></div>
+      <div id="endScreen" class="end-screen" hidden><div class="end-card"><span class="eyebrow">PUTUSAN PENGADILAN</span><h2>KEADILAN<br><em>menang hari ini.</em></h2><p id="endingText"></p><div class="ending-values"><span>TASAMUH</span><span>MUSAWAH</span><span>UKHUWWAH</span></div><button id="restartButton" class="gold-button">ULANGI SIDANG <span>↗</span></button></div></div>
+    </section>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
