@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101624">
+  <meta name="description" content="RUDY — visual novel interaktif tentang keadilan, tasamuh, musawah, dan ukhuwwah.">
+  <title>RUDY — Sidang Keadilan</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23101624'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='48' font-weight='bold' fill='%23e4bf70'%3ER%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="game" class="game-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Rudy home"><span class="brand-mark">R</span><span>RUDY<small>JUSTICE HAS NO BORDERS</small></span></a>
+      <div class="chapter-label"><span class="live-dot"></span><span id="locationLabel">GEDUNG PENGADILAN · RUANG SIDANG</span></div>
+      <div class="top-actions"><button id="soundBtn" class="icon-button" aria-label="Suara aktif" title="Suara">♫</button><button id="restartBtn" class="icon-button" aria-label="Mulai ulang" title="Mulai ulang">↻</button></div>
+    </header>
+
+    <section id="prologue" class="prologue screen active" aria-label="Prolog">
+      <div class="prologue-grain"></div><div class="prologue-content">
+        <p class="eyebrow">SEBUAH VISUAL NOVEL INTERAKTIF</p><h1>RUDY<span>.</span></h1><div class="gold-rule"></div>
+        <p id="synopsis" class="synopsis"></p>
+        <button id="startBtn" class="primary-button hidden">MULAI SIDANG <span>→</span></button>
+        <p class="prologue-foot">14 BAB · SATU GEDUNG PENGADILAN · SATU KEBENARAN</p>
+      </div>
+      <div class="prologue-side-note">TASAMUH &nbsp; / &nbsp; MUSAWAH &nbsp; / &nbsp; UKHUWWAH</div>
+    </section>
+
+    <section id="playScreen" class="screen play-screen" aria-label="Permainan">
+      <div class="hud">
+        <div class="session-card"><span class="hud-kicker">SIDANG</span><strong><span id="sessionNumber">01</span><i> / 14</i></strong><span id="phaseLabel" class="phase-label">MULTIKULTURALISME</span></div>
+        <div class="health-card"><div class="health-heading"><span>TEKANAN PAK RAYA</span><strong id="hpValue">100%</strong></div><div class="health-track"><div id="hpBar" class="health-fill"></div></div><span id="hpCaption" class="health-caption">SANGAT PERCAYA DIRI</span></div>
+      </div>
+
+      <div id="courtroom" class="courtroom" aria-label="Ruang sidang">
+        <div class="court-window"><div class="window-glow"></div><div class="window-bars"></div></div>
+        <div class="court-wall-line"></div><div class="court-emblem"><span>✦</span><small>KEADILAN</small></div>
+        <div class="gallery gallery-left"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="gallery gallery-right"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="judge-bench"><div class="bench-front"><span>R&nbsp; I&nbsp; D&nbsp; A&nbsp; N</span></div><div class="bench-top"></div></div>
+        <div class="witness-box"><span>SAKSI</span></div><div class="counsel-table"></div>
+        <div id="actor" class="actor actor-rudy" aria-label="Rudy">
+          <div class="actor-glow"></div><div class="portrait">
+            <div class="hair-back"></div><div class="neck"></div><div class="shirt"></div><div class="jacket"></div><div class="tie"></div><div class="face"><i class="brow left"></i><i class="brow right"></i><i class="eye left"></i><i class="eye right"></i><i class="nose"></i><i class="mouth"></i><i class="hair-fringe"></i><i class="ear left"></i><i class="ear right"></i></div><div class="hair-top"></div><div class="actor-tag">RUDY <small>PEMBELA</small></div>
+          </div>
+        </div>
+        <div class="speaker-strip"><span class="speaker-icon">◈</span><span id="speakerName">RUDY</span><span class="speaker-role" id="speakerRole">PEMBELA</span></div>
+        <div id="rulingStamp" class="ruling-stamp hidden">PUTUSAN<br><b>ADIL</b></div>
+      </div>
+
+      <section id="dialoguePanel" class="dialogue-panel">
+        <div class="dialogue-topline"><span id="dialogueChapter">BAB 01 · TOLERANSI</span><span id="dialogueCount">01 / 14</span></div>
+        <div id="dialogueText" class="dialogue-text" tabindex="0" aria-live="polite"></div>
+        <div class="dialogue-bottom"><span id="dialogueHint">KLIK KOTAK DIALOG UNTUK MELANJUTKAN</span><span class="continue-glyph">▼</span></div>
+      </section>
+
+      <section id="typingPanel" class="typing-panel hidden" aria-label="Ketik bantahan">
+        <div class="typing-heading"><div><span class="hud-kicker">SUSUN ARGUMENMU</span><strong>BANTAHAN <span id="typingSession">01</span></strong></div><div class="no-timer">∞ <span>TANPA BATAS WAKTU</span></div></div>
+        <div class="quote-card"><span class="quote-mark">“</span><p id="targetText"></p></div>
+        <label class="input-label" for="argumentInput"><span>KETIK BANTAHAN PERSIS SEPERTI DI ATAS</span><span id="typingStatus">0 KARAKTER</span></label>
+        <textarea id="argumentInput" rows="3" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Mulai mengetik di sini…" aria-describedby="typingFeedback"></textarea>
+        <div class="input-footer"><p id="typingFeedback"><span class="status-dot"></span>Ketik paragraf lengkap, lalu tekan Enter.</p><button id="submitBtn" class="submit-button" disabled>KIRIM BANTAHAN <span>↵</span></button></div>
+      </section>
+      <footer class="game-footer"><span>RUANG SIDANG NO. 01</span><span>KEADILAN UNTUK SEMUA · <b id="footerLocation">RUANG SIDANG</b></span><span>RUDY <i>×</i> KEBENARAN</span></footer>
+    </section>
+
+    <div id="objectionOverlay" class="objection-overlay hidden" aria-hidden="true"><div class="objection-flash"></div><div class="objection-burst"></div><div class="objection-banner"><span class="objection-small">BANTAHAN DITERIMA</span><strong>OBJECTION<span>!</span></strong><div class="objection-rule"></div><small>RUDY · PEMBELA KEBENARAN</small></div><div class="objection-timer"><span id="objectionCountdown">09</span><small>DETIK</small></div></div>
+    <div id="innerModal" class="inner-modal hidden"><div class="inner-card"><span class="inner-label">MONOLOG BATIN · <b id="innerSpeaker">PAK RAYA</b></span><p id="innerText"></p><button id="continueBtn" class="primary-button">LANJUTKAN SIDANG <span>→</span></button></div></div>
+    <div id="finalModal" class="final-modal hidden"><div class="final-card"><div class="final-seal">✦</div><p class="eyebrow">PENGADILAN NEGERI · PUTUSAN AKHIR</p><h2>KEADILAN<br><em>UNTUK SEMUA.</em></h2><p id="finalCopy"></p><div class="final-values"><span>TASAMUH</span><span>MUSAWAH</span><span>UKHUWWAH</span></div><button id="playAgainBtn" class="primary-button">ULANGI PERJALANAN <span>↻</span></button></div></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
